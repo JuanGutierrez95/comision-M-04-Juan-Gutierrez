@@ -1,5 +1,9 @@
+/* Operaciones CRUD para usuarios usando el modelo User */
+
+// Importación del modelo User
 const User = require("../models/User");
 
+// Obtener todos los usuarios
 const getUsers = async (req, res) => {
   try {
     const users = await User.find();
@@ -12,6 +16,7 @@ const getUsers = async (req, res) => {
   }
 };
 
+// Obtener un usuario específico por ID
 const getUser = async (req, res) => {
   try {
     const { id } = req.params;
@@ -25,6 +30,7 @@ const getUser = async (req, res) => {
   }
 };
 
+// Crear un nuevo usuario
 const createUser = async (req, res) => {
   try {
     const { username, password, email, avatarURL } = req.body;
@@ -46,6 +52,7 @@ const createUser = async (req, res) => {
   }
 };
 
+// Actualizar un usuario por ID
 const updateUser = async (req, res) => {
   try {
     const { id, username, password, email, avatarURL } = req.body;
@@ -63,6 +70,7 @@ const updateUser = async (req, res) => {
   }
 };
 
+// Eliminar un usuario por ID
 const deleteUser = async (req, res) => {
   try {
     const { id } = req.body;
@@ -74,6 +82,7 @@ const deleteUser = async (req, res) => {
   }
 };
 
+// Exportar las funciones de manipulación de usuarios
 module.exports = {
   getUsers,
   getUser,

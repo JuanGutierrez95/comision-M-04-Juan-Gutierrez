@@ -1,5 +1,9 @@
+/* Definición del esquema y modelo para las publicaciones usando Mongoose */
+
+//Importación de mongoose
 const mongoose = require("mongoose");
 
+// Definición del esquema para las publicaciones
 const postSchema = new mongoose.Schema({
   title: {
     type: String,
@@ -11,7 +15,7 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 3,
-    maxlength: 200,
+    maxlength: 500,
   },
   autor: {
     type: mongoose.Schema.Types.ObjectId,
@@ -25,6 +29,7 @@ const postSchema = new mongoose.Schema({
       required: true,
     },
   ],
+
   imageURL: {
     type: String,
     required: true,
@@ -35,6 +40,8 @@ const postSchema = new mongoose.Schema({
   },
 });
 
+// Creación del modelo Post basado en el esquema definido
 const Post = mongoose.model("Post", postSchema);
 
+// Exportar el modelo Post
 module.exports = Post;

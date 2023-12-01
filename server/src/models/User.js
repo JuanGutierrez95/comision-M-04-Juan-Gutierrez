@@ -1,26 +1,27 @@
+/* Definición del esquema y modelo para los usuarios usando Mongoose */
+
+//Importación de mongoose
 const mongoose = require("mongoose");
 
+// Definición del esquema para los usuarios
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
-    unique: false,
     required: true,
     minlength: 3,
     maxlength: 50,
   },
   password: {
     type: String,
-    unique: false,
     required: true,
-    minlength: 3,
-    maxlength: 15,
+    minlength: 4,
+    maxlength: 25,
   },
   email: {
     type: String,
-    unique: true,
     required: true,
     minlength: 5,
-    maxlength: 20,
+    maxlength: 40,
   },
   avatarURL: {
     type: String,
@@ -30,6 +31,8 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+// Creación del modelo User basado en el esquema definido
 const User = mongoose.model("User", userSchema);
 
+// Exportar el modelo User
 module.exports = User;
