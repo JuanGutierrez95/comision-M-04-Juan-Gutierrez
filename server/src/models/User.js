@@ -1,5 +1,9 @@
+/* Definición del esquema y modelo para los usuarios usando Mongoose */
+
+//Importación de mongoose
 const mongoose = require("mongoose");
 
+// Definición del esquema para los usuarios
 const userSchema = new mongoose.Schema({
   username: {
     type: String,
@@ -27,6 +31,8 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+// Creación del modelo User basado en el esquema definido
 const User = mongoose.model("User", userSchema);
 
+// Exportar el modelo User
 module.exports = User;

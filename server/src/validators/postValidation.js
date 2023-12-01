@@ -1,5 +1,9 @@
+/* Validación de publicaciones utilizando express-validator */
+
+// Importación de body desde express-validator
 const { body } = require("express-validator");
 
+// Función para validar la creación de publicaciones
 const validatePostCreate = () => {
   return [
     body("title")
@@ -33,6 +37,7 @@ const validatePostCreate = () => {
   ];
 };
 
+// Función para validar la edición de publicaciones
 const validatePostEdit = () => {
   return [
     body("title")
@@ -62,6 +67,7 @@ const validatePostEdit = () => {
   ];
 };
 
+// Exportar las funciones de validación
 module.exports = {
   validatePostCreate,
   validatePostEdit,

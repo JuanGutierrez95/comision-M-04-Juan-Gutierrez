@@ -1,5 +1,9 @@
+/* Definición del esquema y modelo para los comentarios usando Mongoose */
+
+// Importación de mongoose
 const mongoose = require("mongoose");
 
+// Definición del esquema para los comentarios
 const commentSchema = new mongoose.Schema({
   autor: {
     type: mongoose.Schema.Types.ObjectId,
@@ -17,6 +21,8 @@ const commentSchema = new mongoose.Schema({
   }
 });
 
+// Creación del modelo Comment basado en el esquema definido
 const Comment = mongoose.model("Comment", commentSchema);
 
+// Exportar el modelo Comment
 module.exports = Comment;
