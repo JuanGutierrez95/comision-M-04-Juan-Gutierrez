@@ -11,7 +11,7 @@ const postSchema = new mongoose.Schema({
     type: String,
     required: true,
     minlength: 3,
-    maxlength: 200,
+    maxlength: 500,
   },
   autor: {
     type: mongoose.Schema.Types.ObjectId,
@@ -25,6 +25,7 @@ const postSchema = new mongoose.Schema({
       required: true,
     },
   ],
+
   imageURL: {
     type: String,
     required: true,

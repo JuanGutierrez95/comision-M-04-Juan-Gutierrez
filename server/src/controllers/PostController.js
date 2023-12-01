@@ -2,8 +2,7 @@ const Post = require("../models/Post");
 
 const getPosts = async (req, res) => {
   try {
-    const posts = await Post.find().populate("autor");
- 
+    const posts = await Post.find().populate("autor").populate("comments");
     return res.json(posts);
   } catch (error) {
     res.status(500).json({ message: "Ocurrio un error interno", error: error });
@@ -25,17 +24,15 @@ const getPost = async (req, res) => {
 const createPost = async (req, res) => {
   try {
     const { title, description, autor, imageURL } = req.body;
-    console.log(req.body);
     const newPost = new Post({
       title: title,
       description: description,
       autor: autor,
       imageURL: imageURL,
     });
-   await newPost.save();
-   
-      res.status(200).json({ message: "Post creado" })
-      
+    await newPost.save();
+
+    res.status(200).json({ message: "Post creado" });
   } catch (error) {
     res.status(500).json({ message: "Ocurrio un error interno", error: error });
   }
