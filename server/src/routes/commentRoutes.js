@@ -1,5 +1,7 @@
 const commentRouter = require("express").Router();
 
+const validatorMiddleware = require("../middlewares/validatorMiddleware.js");
+const { validateCommentCreate, validateCommentEdit } = require("../validators/commentValidation.js");
 const {
   getComments,
   getComment,
@@ -12,9 +14,9 @@ commentRouter.get("/comments", getComments);
 
 commentRouter.get("/comment/:id", getComment);
 
-commentRouter.post("/comment/", createComment);
+commentRouter.post("/comment/", createComment, validatorMiddleware, validateCommentCreate);
 
-commentRouter.put("/comment", updateComment);
+commentRouter.put("/comment", updateComment, validatorMiddleware, validateCommentEdit);
 
 commentRouter.delete("/comment", deleteComment);
 

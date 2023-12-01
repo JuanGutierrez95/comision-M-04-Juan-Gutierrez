@@ -3,7 +3,6 @@ const Comment = require("../models/Comment");
 const getComments = async (req, res) => {
   try {
     const comments = await Comment.find().populate("autor").populate("post");
-    console.log(comments);
     return res.json(comments);
   } catch (error) {
     res.status(500).json({ message: "Ocurrio un error interno", error: error });
@@ -14,7 +13,8 @@ const getComment = async (req, res) => {
   try {
     const { id } = req.params;
     const comment = await Comment.find({
-      post: id});
+      post: id,
+    }).populate("autor");
     return comment
       ? res.json(comment)
       : res.status(400).json({ message: "Comentario no encontrado" });
@@ -32,10 +32,9 @@ const createComment = async (req, res) => {
       post: post,
     });
 
-     await newComment.save();
-    
-       res.status(200).json({ message: "Comentario creado" })
-      
+    await newComment.save();
+
+    res.status(200).json({ message: "Comentario creado" });
   } catch (error) {
     res.status(500).json({ message: "Ocurrio un error interno", error: error });
   }
