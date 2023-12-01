@@ -1,5 +1,9 @@
+/* Operaciones CRUD para publicaciones usando el modelo Post */
+
+// Importación del modelo Post
 const Post = require("../models/Post");
 
+// Obtener todas las publicaciones
 const getPosts = async (req, res) => {
   try {
     const posts = await Post.find().populate("autor").populate("comments");
@@ -9,6 +13,7 @@ const getPosts = async (req, res) => {
   }
 };
 
+// Obtener una publicación específica por ID
 const getPost = async (req, res) => {
   try {
     const { id } = req.params;
@@ -21,6 +26,7 @@ const getPost = async (req, res) => {
   }
 };
 
+// Crear una nueva publicación
 const createPost = async (req, res) => {
   try {
     const { title, description, autor, imageURL } = req.body;
@@ -38,6 +44,7 @@ const createPost = async (req, res) => {
   }
 };
 
+// Actualizar una publicación por ID
 const updatePost = async (req, res) => {
   try {
     const { id, title, description } = req.body;
@@ -51,6 +58,7 @@ const updatePost = async (req, res) => {
   }
 };
 
+// Eliminar una publicación por ID
 const deletePost = async (req, res) => {
   try {
     const { id } = req.body;
@@ -61,6 +69,7 @@ const deletePost = async (req, res) => {
   }
 };
 
+// Exportar las funciones de manipulación de publicaciones
 module.exports = {
   getPosts,
   getPost,

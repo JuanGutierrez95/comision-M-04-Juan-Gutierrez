@@ -1,5 +1,9 @@
+/* Enrutamiento para las operaciones de usuarios usando Express */
+
+// Importación del enrutador de Express
 const userRouter = require("express").Router();
 
+// Importación de middlewares y controladores
 const validatorMiddleware = require("../middlewares/validatorMiddleware.js");
 const {
   validateUserCreate,
@@ -13,6 +17,7 @@ const {
   deleteUser,
 } = require("./../controllers/UserController.js");
 
+// Rutas para las operaciones de usuarios
 userRouter.get("/users", getUsers);
 
 userRouter.get("/user/:id", getUser);
@@ -23,4 +28,5 @@ userRouter.put("/user", updateUser, validatorMiddleware, validateUserEdit);
 
 userRouter.delete("/user", deleteUser);
 
+// Exportar el enrutador userRouter
 module.exports = userRouter;

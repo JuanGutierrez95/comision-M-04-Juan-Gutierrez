@@ -1,5 +1,10 @@
+/* Operaciones CRUD para comentarios usando el modelo Comment */
+
+// Importación del modelo Comment
+
 const Comment = require("../models/Comment");
 
+// Obtener todos los comentarios
 const getComments = async (req, res) => {
   try {
     const comments = await Comment.find().populate("autor").populate("post");
@@ -9,6 +14,7 @@ const getComments = async (req, res) => {
   }
 };
 
+// Obtener un comentario específico por ID
 const getComment = async (req, res) => {
   try {
     const { id } = req.params;
@@ -23,6 +29,7 @@ const getComment = async (req, res) => {
   }
 };
 
+// Crear un nuevo comentario
 const createComment = async (req, res) => {
   try {
     const { autor, description, post } = req.body;
@@ -40,6 +47,7 @@ const createComment = async (req, res) => {
   }
 };
 
+// Actualizar un comentario por ID
 const updateComment = async (req, res) => {
   try {
     const { id, description } = req.body;
@@ -52,6 +60,7 @@ const updateComment = async (req, res) => {
   }
 };
 
+// Eliminar un comentario por ID
 const deleteComment = async (req, res) => {
   try {
     const { id } = req.body;
@@ -62,6 +71,7 @@ const deleteComment = async (req, res) => {
   }
 };
 
+// Exportar las funciones de manipulación de comentarios
 module.exports = {
   getComments,
   getComment,

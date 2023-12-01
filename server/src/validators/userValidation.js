@@ -1,5 +1,9 @@
+/* Validación de usuarios utilizando express-validator */
+
+// Importación de body desde express-validator
 const { body } = require("express-validator").body;
 
+// Función para validar la creación de usuarios
 const validateUserCreate = () => {
   return [
     body("username")
@@ -29,6 +33,7 @@ const validateUserCreate = () => {
   ];
 };
 
+// Función para validar la edición de usuarios
 const validateUserEdit = () => {
   return [
     body("username")
@@ -54,6 +59,7 @@ const validateUserEdit = () => {
   ];
 };
 
+// Exportar las funciones de validación
 module.exports = {
   validateUserCreate,
   validateUserEdit,

@@ -1,5 +1,9 @@
+/* Validación de comentarios utilizando express-validator*/
+
+// Importación de body desde express-validator
 const { body } = require("express-validator");
 
+// Función para validar la creación de comentarios
 const validateCommentCreate = () => {
   return [
     body("autor")
@@ -22,6 +26,7 @@ const validateCommentCreate = () => {
   ];
 };
 
+// Función para validar la edición de comentarios
 const validateCommentEdit = () => {
   return [
     body("autor")
@@ -41,6 +46,7 @@ const validateCommentEdit = () => {
   ];
 };
 
+// Exportar las funciones de validación
 module.exports = {
   validateCommentCreate,
   validateCommentEdit,
