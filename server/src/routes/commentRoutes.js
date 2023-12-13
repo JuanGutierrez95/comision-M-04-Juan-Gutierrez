@@ -17,7 +17,7 @@ const {
 // Rutas para las operaciones de comentarios
 commentRouter.get("/comments", getComments);
 
-commentRouter.get("/comment/:id", getComment);
+commentRouter.get("/comment/:idPosteo", getComment);
 
 commentRouter.post("/comment/", createComment, validatorMiddleware, validateCommentCreate);
 
