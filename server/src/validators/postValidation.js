@@ -25,11 +25,12 @@ const validatePostCreate = () => {
       .withMessage("Author is required")
       .isMongoId()
       .withMessage("Author ID must be a valid MongoDB ID"),
-    body("comments")
+    /*body("comments")
       .optional()
       .isArray()
       .withMessage("Comments must be an array of comment IDs"),
-    body("imageURL")
+    */
+      body("imageURL")
       .exists()
       .withMessage("Image URL is required")
       .isURL()
@@ -56,11 +57,13 @@ const validatePostEdit = () => {
       .optional()
       .isMongoId()
       .withMessage("Author ID must be a valid MongoDB ID"),
-    body("comments")
+    /*
+      body("comments")
       .optional()
       .isArray()
       .withMessage("Comments must be an array of comment IDs"),
-    body("imageURL")
+    */
+      body("imageURL")
       .optional()
       .isURL()
       .withMessage("Please provide a valid URL for the image"),
