@@ -1,12 +1,13 @@
 /* Operaciones CRUD para publicaciones usando el modelo Post */
 
 // Importación del modelo Post
+const Comment = require("../models/Comment");
 const Post = require("../models/Post");
 
 // Obtener todas las publicaciones
 const getPosts = async (req, res) => {
   try {
-    const posts = await Post.find().populate("autor").populate("comments");
+    const posts = await Post.find().populate("autor", "-password").populate("comments");
     return res.json(posts);
   } catch (error) {
     res.status(500).json({ message: "Ocurrio un error interno", error: error });
@@ -18,6 +19,9 @@ const getPost = async (req, res) => {
   try {
     const { id } = req.params;
     const post = await Post.findById(id);
+    const comments = await Comment.find(); //new change
+    post.comments = comments;
+    console.log(post);
     return post
       ? res.json(post)
       : res.status(400).json({ message: "Post no encontrado" });
