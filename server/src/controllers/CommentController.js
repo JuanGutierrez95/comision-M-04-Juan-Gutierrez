@@ -3,11 +3,12 @@
 // Importación del modelo Comment
 
 const Comment = require("../models/Comment");
+const Post = require("../models/Post");
 
 // Obtener todos los comentarios
 const getComments = async (req, res) => {
   try {
-    const comments = await Comment.find().populate("autor").populate("post");
+    const comments = await Comment.find();
     return res.json(comments);
   } catch (error) {
     res.status(500).json({ message: "Ocurrio un error interno", error: error });
@@ -17,9 +18,9 @@ const getComments = async (req, res) => {
 // Obtener un comentario específico por ID
 const getComment = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { idPosteo } = req.params;
     const comment = await Comment.find({
-      post: id,
+      post: idPosteo,
     }).populate("autor");
     return comment
       ? res.json(comment)
@@ -32,13 +33,13 @@ const getComment = async (req, res) => {
 // Crear un nuevo comentario
 const createComment = async (req, res) => {
   try {
-    const { autor, description, post } = req.body;
+    const { autor, description, idPosteo } = req.body;
     const newComment = new Comment({
       autor: autor,
       description: description,
-      post: post,
+      post: idPosteo,
     });
-
+    
     await newComment.save();
 
     res.status(200).json({ message: "Comentario creado" });
@@ -50,8 +51,8 @@ const createComment = async (req, res) => {
 // Actualizar un comentario por ID
 const updateComment = async (req, res) => {
   try {
-    const { id, description } = req.body;
-    await Comment.findByIdAndUpdate(id, {
+    const { idPosteo, description } = req.body;
+    await Comment.findByIdAndUpdate(idPosteo, {
       description: description,
     });
     return res.json({ message: "Comentario actualizado" });
@@ -63,8 +64,8 @@ const updateComment = async (req, res) => {
 // Eliminar un comentario por ID
 const deleteComment = async (req, res) => {
   try {
-    const { id } = req.body;
-    await Comment.findByIdAndDelete(id);
+    const { idPosteo } = req.body;
+    await Comment.findByIdAndDelete(idPosteo);
     return res.json({ message: "Comentario eliminado con éxito" });
   } catch (error) {
     res.status(500).json({ message: "Ocurrio un error interno", error: error });
