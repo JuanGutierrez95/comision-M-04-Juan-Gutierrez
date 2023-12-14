@@ -1,16 +1,14 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import NavbarComponent from "../components/NavbarComponent";
-import Footer from "../components/Footer";
+import NavBar from "../components/NavBar";
 
 const Layout = ({ children }) => {
   return (
     <>
-      <NavbarComponent />
+      <NavBar />
       <div style={{ padding: 20, color: "red" }}>
         <Card>{children}</Card>
       </div>
-      <Footer />
     </>
   );
 };
