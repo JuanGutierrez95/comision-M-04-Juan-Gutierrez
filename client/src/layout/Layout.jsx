@@ -1,8 +1,8 @@
-import React from "react";
 import { Card } from "react-bootstrap";
 import NavBar from "../components/NavBar";
 
-const Layout = ({ children }) => {
+const Layout = (props) => {
+  const children = props.children;
   return (
     <>
       <NavBar />
