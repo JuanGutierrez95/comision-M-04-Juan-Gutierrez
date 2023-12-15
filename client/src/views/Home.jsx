@@ -1,5 +1,4 @@
 import { Card } from "react-bootstrap";
-import NavBar from "../components/NavBar";
 import { useEffect, useState } from "react";
 import DateTable from "../components/DateTable";
 import { useAuthContext } from "../context/AuthContext";
