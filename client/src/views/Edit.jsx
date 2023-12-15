@@ -7,10 +7,10 @@ import EditForm from "../Form/EditForm";
 const Edit = () => {
   const { id } = useParams();
 
-  const { toke, username } = useAuthContext();
+  const { token, username } = useAuthContext();
   return (
     <Card.Body>
-      <EditForm id={id} username={username} token={toke} />
+      <EditForm id={id} username={username} token={token} />
     </Card.Body>
   );
 };
