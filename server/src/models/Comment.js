@@ -1,28 +1,27 @@
 /* Definición del esquema y modelo para los comentarios usando Mongoose */
 
 // Importación de mongoose
-const mongoose = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 // Definición del esquema para los comentarios
-const commentSchema = new mongoose.Schema({
-  autor: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
-  },
-  description: {
+const ComentarioSchema = new Schema({
+  descripcion: {
     type: String,
     required: true,
   },
-  post: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Post",
-    required: true,
-  }
+  autor: {
+    type: Schema.Types.ObjectId,
+    ref: "usuario",
+  },
+  posteo: {
+    type: Schema.Types.ObjectId,
+    ref: "posteo",
+  },
 });
 
 // Creación del modelo Comment basado en el esquema definido
-const Comment = mongoose.model("Comment", commentSchema);
+const Comment = model("comentario", ComentarioSchema);
 
 // Exportar el modelo Comment
 module.exports = Comment;
+
