@@ -1,104 +1,110 @@
 import React, { useState } from "react";
 import { Alert, Button, Card, Form } from "react-bootstrap";
 import axios from "axios";
+import { guardarDatos, guardarToken } from "../utils/login";
 import { useAuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [usuario, setUsuario] = useState("");
   const [password, setPassword] = useState("");
-  const [disableButton, setDisableButton] = useState(false);
-  const [errors, setErrors] = useState({});
+  const [deshabilitarBoton, setDeshabilitarBoton] = useState(false);
+  const [errores, setErrores] = useState({});
 
   const navigate = useNavigate();
   const { login } = useAuthContext();
 
-  const handleUsernameChange = (e) => {
-    e.preventDefault();
-    setUsername(e.target.value);
+  const cambiarUsuario = (e) => {
+    setUsuario(e.target.value);
   };
 
-  const handlePasswordChange = (e) => {
-    e.preventDefault();
+  const cambiarPassword = (e) => {
     setPassword(e.target.value);
   };
 
-  const checkData = async () => {
-    let myErrors = {};
+  const verificarDatos = async () => {
+    let misErrores = {};
 
-    if (username.trim().length === 0) {
-      myErrors.username = "Please enter a username";
+    if (usuario.length === 0) {
+      misErrores.usuario = "Debe introducir un usuario";
     }
 
     if (password.length === 0) {
-      myErrors.password = "Please enter a password";
+      misErrores.password = "Debe introducir una contraseña";
     }
 
-    setErrors(myErrors);
+    setErrores(misErrores);
 
-    if (Object.entries(myErrors).length === 0) {
-      setDisableButton(true);
+    if (Object.entries(misErrores).length === 0) {
+      setDeshabilitarBoton(true);
 
-      await sendData();
+      await mandarDatos();
     }
   };
-
-  const sendData = async () => {
+  const mandarDatos = async () => {
     const url = "http://localhost:3000/autenticar";
 
-    const data = {
-      username: username,
+    const datos = {
+      usuario: usuario,
       password: password,
     };
 
     try {
-      const response = await axios.post(url, data);
+      const respuesta = await axios.post(url, datos);
 
-      if (response.status === 200) {
-        const { data, token } = response.data;
-        login(data, token);
+      if (respuesta.status === 200) {
+       
+        const { datos, token } = respuesta.data;
+        login(datos, token);
         navigate("/");
+      } else {
+        setErrores({
+          error: "Los datos ingresados no son válidos",
+        });
       }
     } catch (error) {
-      setErrors({
-        error: "An unexpected error occurred",
+      setErrores({
+        error: "Ocurrio un error inesperado",
       });
     }
-    setDisableButton(false);
+    setDeshabilitarBoton(false);
   };
-
   return (
     <Card.Body>
       <Form>
-        <Form.Group className="mb-3" controlId="username">
-          <Form.Label>Username</Form.Label>
+        <Form.Group className="mb-3" controlId="usuario">
+          <Form.Label>Usuario</Form.Label>
           <Form.Control
             type="text"
-            placeholder="Enter username"
-            onInput={handleUsernameChange}
+            placeholder="Usuario"
+            onInput={cambiarUsuario}
           />
-          {errors.username && (
-            <Form.Text style={{ color: "red" }}>{errors.username}</Form.Text>
+          {errores.usuario && (
+            <Form.Text style={{ color: "red" }}>{errores.usuario}</Form.Text>
           )}
         </Form.Group>
-        <Form.Group className="mb-3" controlId="password">
-          <Form.Label>Password</Form.Label>
+
+        <Form.Group className="mb-3" controlId="contraseña">
+          <Form.Label>Contraseña</Form.Label>
           <Form.Control
             type="password"
-            placeholder="Enter password"
-            onInput={handlePasswordChange}
+            placeholder="Contraseña"
+            onInput={cambiarPassword}
           />
-          {errors.password && (
-            <Form.Text style={{ color: "red" }}>{errors.password}</Form.Text>
+          {errores.password && (
+            <Form.Text style={{ color: "red" }}>
+              {errores.password}
+            </Form.Text>
           )}
         </Form.Group>
-        {errors.error && <Alert variant="danger">{errors.error}</Alert>}
+
+        {errores.error && <Alert variant="danger">{errores.error}</Alert>}
         <Button
           variant="primary"
           type="submit"
-          onClick={checkData}
-          disabled={disableButton}
+          onClick={verificarDatos}
+          disabled={deshabilitarBoton}
         >
-          Enter
+          Ingresar
         </Button>
       </Form>
     </Card.Body>
