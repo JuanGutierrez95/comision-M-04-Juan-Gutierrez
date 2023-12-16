@@ -1,6 +1,7 @@
-import Layout from "./layout/Layout";
-import { AuthProvider } from "./context/AuthContext";
-import AppRouter from "./router/AppRouter";
+import { AuthProvider } from "./context/AuthContext.jsx";
+import Layout from "./layout/Layout.jsx";
+import AppRouter from "./router/AppRouter.jsx";
+
 const App = () => {
   return (
     <AuthProvider>
