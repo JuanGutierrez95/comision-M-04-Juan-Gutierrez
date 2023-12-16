@@ -28,7 +28,3 @@ El proyecto está construido utilizando tecnologías de programación web, inclu
 
 - **Repositorio en GitHub:** [https://github.com/JuanGutierrez95/comision-M-04-juan-gutierrez.git](https://github.com/JuanGutierrez95/comision-M-04-juan-gutierrez.git)
 - *¡Sentite libre de explorar el código fuente en GitHub!*
-
-### Estado del Proyecto
-
-Actualmente, el proyecto se encuentra en desarrollo activo.
