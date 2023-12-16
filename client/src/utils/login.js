@@ -1,23 +1,24 @@
-export const saveData = async (data) => {
-  const textValue = JSON.stringify(data);
+export const guardarDatos = (datos) => {
+  const valorTexto = JSON.stringify(datos);
 
-  localStorage.setItem("username", textValue);
+  localStorage.setItem("usuario", valorTexto);
 };
 
-export const saveToken = () => {
+export const guardarToken = (token) => {
   localStorage.setItem("token", token);
 };
 
-export const getData = () => {
-  const data = localStorage.getItem("username");
-  return JSON.parse(data);
+export const obtenerDatos = () => {
+  const datos = localStorage.getItem("usuario");
+
+  return JSON.parse(datos);
 };
 
-export const getToken = () => {
+export const obtenerToken = () => {
   return localStorage.getItem("token");
 };
 
-export const cleanLocalStorage = () => {
-  localStorage.removeItem("username");
+export const limpiarLocalStorage = () => {
+  localStorage.removeItem("usuario");
   localStorage.removeItem("token");
 };
