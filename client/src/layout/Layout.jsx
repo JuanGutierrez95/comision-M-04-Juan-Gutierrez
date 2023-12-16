@@ -6,7 +6,7 @@ const Layout = (props) => {
   return (
     <>
       <NavBar />
-      <div style={{ padding: 20, color: "red" }}>
+      <div style={{ padding: 20 }}>
         <Card>{children}</Card>
       </div>
     </>
