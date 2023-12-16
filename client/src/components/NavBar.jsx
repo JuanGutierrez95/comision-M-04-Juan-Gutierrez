@@ -1,18 +1,18 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import logo from "../images/arg-programa.png";
 import { useAuthContext } from "../context/AuthContext";
-const NavBar = () => {
-  const { username, logout } = useAuthContext();
+import logo from "../images/arg-programa.png";
 
-  const handleLogoutChange = () => {
+function NavBar() {
+  const { usuario, logout } = useAuthContext();
+
+  const desconectarUsuario = () => {
     logout();
   };
-
   return (
     <>
-      <Navbar bg="dark" data-bs-theme="dark">
+      <Navbar bg="light" data-bs-theme="light">
         <Container>
           <Navbar.Brand href="/">
             <img
@@ -24,16 +24,16 @@ const NavBar = () => {
             />
           </Navbar.Brand>
           <Nav>
-            <Nav.Link href="/">Home</Nav.Link>
-            {username ? (
+            <Nav.Link href="/">Inicio</Nav.Link>
+            {usuario ? (
               <>
-                <Nav.Link href="/create">Post Create</Nav.Link>
-                <Nav.Link onClick={handleLogoutChange}>Log out</Nav.Link>
+                <Nav.Link href="/crear">Crear Publicación</Nav.Link>
+                <Nav.Link onClick={desconectarUsuario}>Desconectarse</Nav.Link>
               </>
             ) : (
               <>
-                <Nav.Link href="/login">Log in</Nav.Link>
-                <Nav.Link href="/register">Register User</Nav.Link>
+                <Nav.Link href="/login">Iniciar Sesión</Nav.Link>
+                <Nav.Link href="/register">Registrar Usuario</Nav.Link>
               </>
             )}
           </Nav>
@@ -41,6 +41,6 @@ const NavBar = () => {
       </Navbar>
     </>
   );
-};
+}
 
 export default NavBar;
