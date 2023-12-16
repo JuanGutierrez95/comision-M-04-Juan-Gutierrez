@@ -6,56 +6,66 @@ const { body } = require("express-validator").body;
 // Función para validar la creación de usuarios
 const validateUserCreate = () => {
   return [
-    body("username")
-      .exists()
-      .withMessage("Username is required")
-      .isString()
-      .withMessage("Username must be a string")
-      .isLength({ min: 3, max: 50 })
-      .withMessage("Username must be between 3 and 50 characters"),
-    body("email")
-      .exists()
-      .withMessage("Email is required")
-      .isEmail()
-      .withMessage("Please enter a valid email address")
-      .isLength({ min: 5, max: 40 })
-      .withMessage("Email must be between 5 and 40 characters"),
+    body("usuario")
+      .trim()
+      .isLength({ min: 3 })
+      .withMessage("El usuario debe tener al menos 3 caracteres"),
     body("password")
-      .exists()
-      .withMessage("Password is required")
-      .isLength({ min: 4, max: 25 })
-      .withMessage("Password must be between 4 and 25 characters"),
+      .trim()
+      .isLength({ min: 3 })
+      .withMessage("La contraseña debe tener al menos 6 caracteres"),
+    body("nombres")
+      .trim()
+      .notEmpty()
+      .withMessage("El campo nombres no puede estar vacío"),
+    body("apellidos")
+      .trim()
+      .notEmpty()
+      .withMessage("El campo apellidos no puede estar vacío"),
+    body("email")
+      .trim()
+      .isEmail()
+      .withMessage("Ingrese un correo electrónico válido"),
     body("avatarURL")
-      .exists()
-      .withMessage("Avatar URL is required")
+      .trim()
       .isURL()
-      .withMessage("Please provide a valid URL for the avatar"),
+      .withMessage("Ingrese una URL válida para el avatar"),
   ];
 };
 
 // Función para validar la edición de usuarios
 const validateUserEdit = () => {
   return [
-    body("username")
+    body("usuario")
       .optional()
-      .isString()
-      .withMessage("Name must be a string")
-      .isLength({ min: 3, max: 50 })
-      .withMessage("Name must be between 3 and 50 characters"),
-    body("email")
-      .optional()
-      .isEmail()
-      .withMessage("Please enter a valid email address")
-      .isLength({ min: 5, max: 40 })
-      .withMessage("Email must be between 5 and 40 characters"),
+      .trim()
+      .isLength({ min: 3 })
+      .withMessage("El usuario debe tener al menos 3 caracteres"),
     body("password")
       .optional()
-      .isLength({ min: 4, max: 25 })
-      .withMessage("Password must be between 4 and 25 characters"),
+      .trim()
+      .isLength({ min: 3 })
+      .withMessage("La contraseña debe tener al menos 6 caracteres"),
+    body("nombres")
+      .optional()
+      .trim()
+      .notEmpty()
+      .withMessage("El campo nombres no puede estar vacío"),
+    body("apellidos")
+      .optional()
+      .trim()
+      .notEmpty()
+      .withMessage("El campo apellidos no puede estar vacío"),
+    body("email")
+      .optional()
+      .trim()
+      .isEmail()
+      .withMessage("Ingrese un correo electrónico válido"),
     body("avatarURL")
       .optional()
+      .trim()
       .isURL()
-      .withMessage("Please provide a valid URL for the avatar"),
+      .withMessage("Ingrese una URL válida para el avatar"),
   ];
 };
 
