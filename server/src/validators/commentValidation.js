@@ -6,43 +6,26 @@ const { body } = require("express-validator");
 // Función para validar la creación de comentarios
 const validateCommentCreate = () => {
   return [
-    body("autor")
-      .exists()
-      .withMessage("Author is required")
-      .isMongoId()
-      .withMessage("Author ID must be a valid MongoDB ID"),
-    body("description")
-      .exists()
-      .withMessage("Description is required")
-      .isString()
-      .withMessage("Description must be a string")
-      .isLength({ min: 3, max: 200 })
-      .withMessage("Description must be between 3 and 200 characters"),
-    body("post")
-      .exists()
-      .withMessage("Post is required")
-      .isMongoId()
-      .withMessage("Post ID must be a valid MongoDB ID"),
+    body("descripcion").trim(),
+    body("autor").trim().isMongoId().withMessage("ID de autor inválido"),
+    body("posteo").trim().isMongoId().withMessage("ID de posteo inválido"),
   ];
 };
 
 // Función para validar la edición de comentarios
 const validateCommentEdit = () => {
   return [
+    body("descripcion").optional().trim(),
     body("autor")
       .optional()
+      .trim()
       .isMongoId()
-      .withMessage("Author ID must be a valid MongoDB ID"),
-    body("description")
+      .withMessage("ID de autor inválido"),
+    body("posteo")
       .optional()
-      .isString()
-      .withMessage("Description must be a string")
-      .isLength({ min: 3, max: 500 })
-      .withMessage("Description must be between 3 and 500 characters"),
-    body("post")
-      .optional()
+      .trim()
       .isMongoId()
-      .withMessage("Post ID must be a valid MongoDB ID"),
+      .withMessage("ID de posteo inválido"),
   ];
 };
 
