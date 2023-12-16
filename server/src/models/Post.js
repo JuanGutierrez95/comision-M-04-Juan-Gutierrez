@@ -1,46 +1,41 @@
 /* Definición del esquema y modelo para las publicaciones usando Mongoose */
 
 //Importación de mongoose
-const mongoose = require("mongoose");
+const { Schema, model, Types } = require("mongoose");
 
 // Definición del esquema para las publicaciones
-const postSchema = new mongoose.Schema({
-  title: {
+const PosteoSchema = new Schema({
+  titulo: {
     type: String,
     required: true,
-    minlength: 3,
-    maxlength: 50,
   },
-  description: {
+  descripcion: {
     type: String,
     required: true,
-    minlength: 3,
-    maxlength: 500,
   },
   autor: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
+    type: Types.ObjectId,
+    ref: "usuario",
   },
-  comments: [
+  comentario: [
     {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Comment",
-    },
+      type: Types.ObjectId,
+      ref: "comentario",
+    }
   ],
-
   imageURL: {
     type: String,
-    required: true,
-  },
-  createdAt: {
-    type: Date,
-    default: Date.now,
   },
 });
 
 // Creación del modelo Post basado en el esquema definido
-const Post = mongoose.model("Post", postSchema);
+const Post = model("posteo", PosteoSchema);
 
 // Exportar el modelo Post
 module.exports = Post;
+
+
+/* imageURL = 
+https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Cat03.jpg/1025px-Cat03.jpg
+https://isabellaandrespereira.neocities.org/images/Gatito.jpg
+*/
